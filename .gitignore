@@ -27,6 +27,15 @@ ios/build/
 *.aab
 .env
 
+node_modules/
+android/app/build/
+build/
+.gradle/
+.expo/
+dist/
+*.apk
+*.aab
+
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
