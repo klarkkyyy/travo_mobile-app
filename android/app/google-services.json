@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "869163675082",
+    "project_id": "travo-app-82341",
+    "storage_bucket": "travo-app-82341.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869163675082:android:8f2a3c2364b139d649f333",
+        "android_client_info": {
+          "package_name": "com.example.travo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869163675082-msb5gk128mue90tktu9tnmd2cutcdusi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWsf5DVektv9s9ab2r9mEK92EkLAkwfBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869163675082-msb5gk128mue90tktu9tnmd2cutcdusi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "869163675082-7lb9prv9s62fh62vtah173g6b4hdk4j3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.travoApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869163675082:android:faea9ef50ce7f08349f333",
+        "android_client_info": {
+          "package_name": "com.example.travo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869163675082-hc36ksmpv13nk0986sjn8f744br6jd1m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travo_app",
+            "certificate_hash": "1b1de0cea6194c7c4e4431348808dc871987a53b"
+          }
+        },
+        {
+          "client_id": "869163675082-msb5gk128mue90tktu9tnmd2cutcdusi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWsf5DVektv9s9ab2r9mEK92EkLAkwfBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869163675082-msb5gk128mue90tktu9tnmd2cutcdusi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "869163675082-7lb9prv9s62fh62vtah173g6b4hdk4j3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.travoApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
