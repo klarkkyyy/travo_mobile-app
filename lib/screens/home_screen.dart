@@ -14,12 +14,26 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String _sortBy = 'stars';
   String _searchQuery = '';
+  String _photoUrl = '';
   final Set<String> _activeTagFilters = {};
   bool _showSearch = false;
   final _searchCtrl = TextEditingController();
 
   final Set<String> _availableTags = {};
+  @override
+  void initState() {
+    super.initState();
+    _loadPhoto();
+  }
 
+  Future<void> _loadPhoto() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+    final doc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    if (mounted) {
+      setState(() => _photoUrl = doc.data()?['photoUrl'] ?? '');
+    }
+  }
   Stream<List<RoutePost>> _routesStream() {
     return FirebaseFirestore.instance
         .collection('routes')
@@ -171,18 +185,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
               )
             : GestureDetector(
-                onTap: () => Navigator.pushNamed(context, '/profile'),
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: CircleAvatar(
-                    backgroundColor: cs.surfaceContainerHighest,
-                    radius: 16,
-                    child: Icon(
-                      Icons.person_rounded,
-                      color: cs.onSurface.withOpacity(0.5),
-                      size: 20,
-                    ),
-                  ),
+                onTap: () => Navigator.pushNamed(context, '/profile').then((_) {
+                  if (mounted) _loadPhoto();
+                }),
+                child: CircleAvatar(
+                  backgroundColor: cs.surfaceContainerHighest,
+                  radius: 16,
+                  backgroundImage: _photoUrl.isNotEmpty ? NetworkImage(_photoUrl) : null,
+                  child: _photoUrl.isEmpty
+                      ? Icon(Icons.person_rounded, color: cs.onSurface.withOpacity(0.5), size: 20)
+                      : null,
                 ),
               ),
         actions: [
