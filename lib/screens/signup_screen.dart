@@ -15,7 +15,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
 
   String? _selectedGender;
@@ -25,12 +24,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
-    _phoneController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
-
-  // ── Submission ──────────────────────────────────────────────────────────────
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
@@ -45,7 +41,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final error = await AuthService.signUp(
       name: _nameController.text,
       email: _emailController.text,
-      phone: _phoneController.text,
       gender: _selectedGender!,
       password: _passwordController.text,
     );
@@ -56,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (error != null) {
       _showError(error);
     } else {
-      Navigator.pushNamed(context, '/verify-email');
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 
@@ -75,8 +70,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  // ── Validators ──────────────────────────────────────────────────────────────
-
   String? _validateName(String? v) {
     if (v == null || v.trim().isEmpty) return 'Please enter your name.';
     if (v.trim().length < 2) return 'Name must be at least 2 characters.';
@@ -90,22 +83,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return null;
   }
 
-  String? _validatePhone(String? v) {
-    if (v == null || v.trim().isEmpty) return 'Please enter your phone number.';
-    final phoneRegex = RegExp(r'^1[3-9]\d{8}$');
-    if (!phoneRegex.hasMatch(v.trim())) {
-      return 'Enter a valid BD number (e.g. 1XXXXXXXXX).';
-    }
-    return null;
-  }
-
   String? _validatePassword(String? v) {
     if (v == null || v.isEmpty) return 'Please enter a password.';
     if (v.length < 6) return 'Password must be at least 6 characters.';
     return null;
   }
-
-  // ── Build ────────────────────────────────────────────────────────────────────
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +117,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 24),
 
-                // Name
                 AppTextField(
                   hint: 'Name',
                   controller: _nameController,
@@ -143,7 +124,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 14),
 
-                // Email
                 AppTextField(
                   hint: 'Email',
                   controller: _emailController,
@@ -152,38 +132,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 14),
 
-                // Phone
-                FormField<String>(
-                  validator: (_) => _validatePhone(_phoneController.text),
-                  builder: (field) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      PhoneField(controller: _phoneController),
-                      if (field.hasError)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 6, left: 12),
-                          child: Text(
-                            field.errorText!,
-                            style: const TextStyle(
-                              color: AppTheme.errorRed,
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 14),
-
-                // Gender
                 GenderDropdown(
                   value: _selectedGender,
                   onChanged: (v) => setState(() => _selectedGender = v),
                 ),
                 const SizedBox(height: 14),
 
-                // Password
                 AppTextField(
                   hint: 'Password',
                   isPassword: true,
@@ -192,7 +146,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 24),
 
-                // Sign Up button
                 ElevatedButton(
                   onPressed: _isLoading ? null : _submit,
                   child: _isLoading
@@ -208,7 +161,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Login link
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

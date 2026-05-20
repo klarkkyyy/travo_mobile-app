@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
-import '../theme/app_theme.dart';
 import '../widgets/common_widgets.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,8 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
     super.dispose();
   }
-
-  // ── Helpers ───────────────────────────────────────────────────────────────
 
   void _setLoading(bool value) => setState(() => _isLoading = value);
 
@@ -62,8 +59,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // ── Actions ───────────────────────────────────────────────────────────────
-
   Future<void> _handleEmailLogin() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
     _setLoading(true);
@@ -81,30 +76,6 @@ class _LoginScreenState extends State<LoginScreen> {
       _setLoading(false);
     }
   }
-
-  Future<void> _handleForgotPassword() async {
-    final email = _emailController.text.trim();
-    if (email.isEmpty) {
-      _showError('Enter your email above first, then tap "Forgot password".');
-      return;
-    }
-
-    final error = await AuthService.sendPasswordReset(email: email);
-
-    if (!mounted) return;
-    if (error != null) {
-      _showError(error);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Password reset email sent. Check your inbox.'),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-    }
-  }
-
-  // ── UI ────────────────────────────────────────────────────────────────────
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +105,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 28),
 
-                // Email field
                 AppTextField(
                   hint: 'Email',
                   keyboardType: TextInputType.emailAddress,
@@ -148,7 +118,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 14),
 
-                // Password field
                 AppTextField(
                   hint: 'Password',
                   isPassword: true,
@@ -159,27 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 24),
 
-                // Forgot password
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: _handleForgotPassword,
-                    child: Text(
-                      'Forgot your password?',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: cs.primary,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-
-                // Log In button
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -198,7 +148,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 32),
 
-                // Sign up link
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

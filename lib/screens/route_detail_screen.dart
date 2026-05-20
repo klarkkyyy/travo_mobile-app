@@ -262,6 +262,19 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                         fontFamily: 'Poppins',
                       ),
                     ),
+                    if (step.dropOff.isNotEmpty) ...[
+                      const SizedBox(width: 8),
+                      Icon(Icons.place_rounded, size: 13, color: cs.onSurface.withOpacity(0.4)),
+                      const SizedBox(width: 2),
+                      Text(
+                        'Drop off: ${step.dropOff}',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: cs.onSurface.withOpacity(0.5),
+                          fontFamily: 'Poppins',
+                        ),
+                      ),
+                    ],
                   ],
                 ),
                 const SizedBox(height: 6),
